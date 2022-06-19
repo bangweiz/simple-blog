@@ -1,3 +1,33 @@
+spring:
+  profiles:
+    active: dev
+
+---
+server:
+  port: 80
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog
+    username: root
+    password: wordpress
+  redis:
+    host: localhost
+    port: 6379
+    username:
+    password:
+  profiles: dev
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      table-prefix: ms_
+
+---
 server:
   port: 80
 
@@ -13,6 +43,7 @@ spring:
     port: ${REDIS.PORT}
     username: ${REDIS.USRENAME}
     password: ${REDIS.PASSWORD}
+  profiles: prod
 
 mybatis-plus:
   configuration:

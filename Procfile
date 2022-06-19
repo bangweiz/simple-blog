@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar blog-api/target/*.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar blog-api/target/*.jar --spring.profiles.active=prod
