@@ -15,11 +15,11 @@ public class ArticleVo {
 
     private String summary;
 
-    private int commentCounts;
+    private Integer commentCounts;
 
-    private int viewCounts;
+    private Integer viewCounts;
 
-    private int weight;
+    private Integer weight;
 
     private String createDate;
 

@@ -15,7 +15,7 @@ public class CommentVo {
 
     private String content;
 
-    private List<CommentVo> childrens;
+    private List<CommentVo> children;
 
     private String createDate;
 

@@ -77,7 +77,7 @@ public class CommentServiceImpl implements CommentService {
         if (level == 1) {
             Long id = comment.getId();
             List<CommentVo> commentVoList = findCommentsByParentId(id);
-            commentVo.setChildrens(commentVoList);
+            commentVo.setChildren(commentVoList);
         }
         if (level > 1) {
             Long toUid = comment.getToUid();
