@@ -7,9 +7,11 @@ import com.simpleblog.blog.service.SysUserService;
 import com.simpleblog.blog.utils.JWTUtils;
 import com.simpleblog.blog.vo.ErrorCode;
 import com.simpleblog.blog.vo.Result;
+import com.simpleblog.blog.vo.UserVo;
 import com.simpleblog.blog.vo.param.LoginParam;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -42,7 +44,10 @@ public class AuthServiceImpl implements AuthService {
         }
         String token = JWTUtils.createToken(user.getId());
         redisTemplate.opsForValue().set("TOKEN_" + token, JSON.toJSONString(user), 1, TimeUnit.DAYS);
-        return Result.success(token);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(user, userVo);
+        userVo.setToken(token);
+        return Result.success(userVo);
     }
 
     @Override

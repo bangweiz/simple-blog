@@ -46,32 +46,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ThreadService threadService;
 
-//    @Override
-//    public Result listArticle(PageParams pageParams) {
-//        Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
-//        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
-//        if (pageParams.getCategoryId() != null) {
-//            wrapper.eq(Article::getCategoryId, pageParams.getCategoryId());
-//        }
-//        List<Long> articleIds = new ArrayList<>();
-//        if (pageParams.getTagId() != null) {
-//            LambdaQueryWrapper<ArticleTag> wrapper1 = new LambdaQueryWrapper<>();
-//            wrapper1.eq(ArticleTag::getTagId, pageParams.getCategoryId());
-//            List<ArticleTag> articleTags = articleTagDao.selectList(wrapper1);
-//            for (ArticleTag articleTag: articleTags) {
-//                articleIds.add(articleTag.getId());
-//            }
-//            if (articleIds.size() > 0) {
-//                wrapper.in(Article::getId, articleIds);
-//            }
-//        }
-//        wrapper.orderByDesc(Article::getWeight, Article::getCreateDate);
-//        Page<Article> articlePage = articleDao.selectPage(page, wrapper);
-//        List<Article> record = articlePage.getRecords();
-//        List<ArticleVo> articleVoList = copyList(record, true, true);
-//        return Result.success(articleVoList);
-//    }
-
     @Override
     public Result listArticle(PageParams pageParams) {
         Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
@@ -105,7 +79,6 @@ public class ArticleServiceImpl implements ArticleService {
                 .select(Article::getId, Article::getTitle)
                 .last("limit " + limit);
         List<Article> articles = articleDao.selectList(wrapper);
-        System.out.println(articles);
         return Result.success(copyList(articles, false, false));
     }
 

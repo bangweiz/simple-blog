@@ -35,7 +35,7 @@ public class SysUserServiceImpl implements SysUserService {
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(SysUser::getAccount, account)
                 .eq(SysUser::getPassword, password)
-                .select(SysUser::getAccount, SysUser::getId, SysUser::getAccount, SysUser::getNickname)
+                .select(SysUser::getAccount, SysUser::getId, SysUser::getAccount, SysUser::getNickname, SysUser::getAvatar)
                 .last("limit 1");
         return sysUserDao.selectOne(wrapper);
     }

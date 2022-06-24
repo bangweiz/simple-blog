@@ -29,7 +29,8 @@ public class CommentServiceImpl implements CommentService {
     public Result commentsByArticleId(Long articleId) {
         LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Comment::getArticleId, articleId)
-                .eq(Comment::getLevel, 1);
+                .eq(Comment::getLevel, 1)
+                .orderByDesc(Comment::getCreateDate);
         List<Comment> comments = commentDao.selectList(wrapper);
 
         List<CommentVo> commentVoList = copyList(comments);
@@ -48,14 +49,14 @@ public class CommentServiceImpl implements CommentService {
         Long parent = commentParam.getParent();
         if (parent == null || parent == 0) {
             comment.setLevel(1);
-        }else{
+        } else {
             comment.setLevel(2);
         }
         comment.setParentId(parent == null ? 0 : parent);
         Long toUserId = commentParam.getToUserId();
         comment.setToUid(toUserId == null ? 0 : toUserId);
         this.commentDao.insert(comment);
-        return Result.success(null);
+        return Result.success(comment.getId().toString());
     }
 
     private List<CommentVo> copyList(List<Comment> comments) {
@@ -90,7 +91,8 @@ public class CommentServiceImpl implements CommentService {
     private List<CommentVo> findCommentsByParentId(Long id) {
         LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Comment::getParentId, id)
-                .eq(Comment::getLevel, 2);
+                .eq(Comment::getLevel, 2)
+                .orderByAsc(Comment::getCreateDate);
         return copyList(commentDao.selectList(wrapper));
     }
 }

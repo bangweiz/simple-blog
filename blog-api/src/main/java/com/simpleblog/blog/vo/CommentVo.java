@@ -17,7 +17,7 @@ public class CommentVo {
 
     private List<CommentVo> children;
 
-    private String createDate;
+    private Long createDate;
 
     private Integer level;
 
