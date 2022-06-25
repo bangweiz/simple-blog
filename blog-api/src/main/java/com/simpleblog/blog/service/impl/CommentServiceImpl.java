@@ -83,7 +83,7 @@ public class CommentServiceImpl implements CommentService {
         if (level > 1) {
             Long toUid = comment.getToUid();
             UserVo toUserVo = sysUserService.findUserVoById(toUid);
-            commentVo.setAuthor(toUserVo);
+            commentVo.setToUser(toUserVo);
         }
         return commentVo;
     }
