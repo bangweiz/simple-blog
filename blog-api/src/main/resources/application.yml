@@ -27,6 +27,8 @@ mybatis-plus:
     db-config:
       table-prefix: ms_
 
+allowedOrigins: http://localhost:3000
+
 ---
 server:
   port: 80
@@ -51,3 +53,5 @@ mybatis-plus:
   global-config:
     db-config:
       table-prefix: ms_
+
+allowedOrigins: ${ALLOWEDORIGIN}
